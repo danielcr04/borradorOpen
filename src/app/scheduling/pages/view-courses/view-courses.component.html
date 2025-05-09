@@ -2,13 +2,17 @@
 <div class="table-wrapper">
   <h1>Courses</h1>
 
+
+
   <!-- Add/Edit Form -->
-  <app-course-management
-    (cancelRequested)="onCancelRequested()"
-    (courseAddRequested)="onCourseAddRequested($event)"
-    (courseUpdateRequested)="onCourseUpdateRequested($event)"
-    [course]="courseData"
-    [editMode]="editMode"/>
+  @if (editMode) {
+    <app-course-management
+      (cancelRequested)="onCancelRequested()"
+      (courseAddRequested)="onCourseAddRequested($event)"
+      (courseUpdateRequested)="onCourseUpdateRequested($event)"
+      [course]="courseData"
+      [editMode]="editMode"/>
+  }
 
   <!-- Data Table -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
@@ -57,8 +61,14 @@
     <!-- Table Header and Rows -->
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" [ngClass]="{ 'editable-row': courseData && courseData.id === row.id }"></tr>
+
+    <!-- Botón para crear un nuevo curso -->
+    <button mat-raised-button color="primary" (click)="onCourseAddRequested(course)">New Course</button>
   </table>
 
   <!-- Paginator -->
   <mat-paginator [pageSizeOptions]="[5, 10, 15]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+
+
 </div>

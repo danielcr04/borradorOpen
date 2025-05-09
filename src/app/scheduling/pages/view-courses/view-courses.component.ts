@@ -19,7 +19,7 @@ import {CourseService} from "../../services/course.service";
 import {CourseManagementComponent} from "../../components/course-management/course-management.component";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass} from "@angular/common";
-import {MatIconButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-view-courses',
@@ -40,7 +40,8 @@ import {MatIconButton} from '@angular/material/button';
     MatRow,
     MatPaginator,
     MatSortHeader,
-    MatIconButton
+    MatIconButton,
+    MatButton
   ],
   templateUrl: './view-courses.component.html',
   styleUrl: './view-courses.component.css'
