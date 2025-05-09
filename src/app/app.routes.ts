@@ -4,6 +4,7 @@ import { PaymentsComponent } from './billing/pages/payments/payments.component';
 import { MainLayoutComponent } from './public/components/main-layout/main-layout.component';
 import { HeaderContentComponent } from './public/components/header-content/header-content.component';
 import { OrganizationComponent } from './dashboard/pages/organization/organization.component';
+import {ViewCoursesComponent} from './scheduling/pages/view-courses/view-courses.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,7 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'payments', component: PaymentsComponent },
+      { path: 'payments', component: ViewCoursesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
@@ -19,7 +20,8 @@ export const routes: Routes = [
     path: '',
     component: HeaderContentComponent,
     children: [
-      { path: 'organization', component: OrganizationComponent }
+      { path: 'organization', component: OrganizationComponent },
+      { path: 'courses', component: ViewCoursesComponent }
     ]
   }
 ];
