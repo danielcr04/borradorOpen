@@ -5,6 +5,7 @@ import { MainLayoutComponent } from './public/components/main-layout/main-layout
 import { HeaderContentComponent } from './public/components/header-content/header-content.component';
 import { OrganizationComponent } from './dashboard/pages/organization/organization.component';
 import {ViewCoursesComponent} from './scheduling/pages/view-courses/view-courses.component';
+import {ViewWeeklySchedulesComponent} from './scheduling/pages/view-weekly-schedules/view-weekly-schedules.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,7 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'payments', component: ViewCoursesComponent },
+      { path: 'payments', component: ViewWeeklySchedulesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

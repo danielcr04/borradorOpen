@@ -13,7 +13,7 @@ import { Schedule, TimeRange } from '../../model/schedule.entity';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import { MatError } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -23,7 +23,7 @@ import { CourseService } from '../../services/course.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-weekly-schedule-action-dialog',
+  selector: 'app-weekly-schedule-dialog',
   imports: [
     MatFormField,
     FormsModule,
@@ -39,11 +39,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatNativeDateModule,
     NgForOf,
-    NgIf,
-    MatIconModule
+    MatIconModule,
+    MatIconButton
   ],
-  templateUrl: './weekly-schedule-action-dialog.component.html',
-  styleUrl: './weekly-schedule-action-dialog.component.css'
+  templateUrl: './weekly-schedule-dialog.component.html',
+  styleUrl: './weekly-schedule-dialog.component.css'
 })
 export class WeeklyScheduleActionDialogComponent {
   dialogTitle?: string;
