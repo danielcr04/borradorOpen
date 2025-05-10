@@ -16,17 +16,16 @@ import {
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {CourseService} from "../../services/course.service";
-import {CourseManagementComponent} from "../../components/course-management/course-management.component";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass} from "@angular/common";
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatDialog} from '@angular/material/dialog';
 import {CourseActionDialogComponent} from '../../components/course-action-dialog/course-action-dialog.component';
+import {TranslateModule, TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-courses',
   imports: [
-    CourseManagementComponent,
     MatTable,
     MatSort,
     MatColumnDef,
@@ -43,7 +42,8 @@ import {CourseActionDialogComponent} from '../../components/course-action-dialog
     MatPaginator,
     MatSortHeader,
     MatIconButton,
-    MatButton
+    MatButton,
+    TranslatePipe
   ],
   templateUrl: './view-courses.component.html',
   styleUrl: './view-courses.component.css'
@@ -67,8 +67,6 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort)
   protected sort!: MatSort;
 
-  /** Controls whether the component is in edit mode */
-  protected editMode: boolean = false;
 
   /** Material table data source for managing and displaying course data */
   protected dataSource!: MatTableDataSource<any>;
@@ -92,7 +90,6 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
    * Initializes the component with default values and creates a new data source
    */
   constructor() {
-    this.editMode = false;
     this.courseData = new Course({});
     this.dataSource = new MatTableDataSource();
     console.log(this.courseData);
@@ -173,42 +170,9 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  /**
-   * Handles the cancellation of create/edit operations.
-   * Resets the component state and refreshes the course list.
-   */
-  protected onCancelRequested() {
-    this.resetEditState();
-    this.getAllCourses();
-  }
 
-  /**
-   * Handles the addition of a new course
-   * @param item - The new course to be added
-   */
-  protected onCourseAddRequested(item: Course) {
-    this.courseData = item;
-    this.createCourse();
-    this.resetEditState();
-  }
-
-  /**
-   * Handles the update of an existing course
-   * @param item - The course with updated information
-   */
-  protected onCourseUpdateRequested(item: Course) {
-    this.courseData = item;
-    this.updateCourse();
-    this.resetEditState();
-  }
-
-  /**
-   * Resets the component's edit state to its default values.
-   * Clears the current course data and exits edit mode.
-   */
   private resetEditState(): void {
     this.courseData = new Course({});
-    this.editMode = false;
   }
 
   /**
@@ -257,4 +221,5 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
   }
 
   //#endregion
+
 }

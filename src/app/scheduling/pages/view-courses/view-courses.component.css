@@ -27,12 +27,12 @@ mat-header-cell {
 
 button {
   margin-right: 8px;
-  background-color: #3f51b5;
+  background-color:  var(--color-primary);
   color: white;
 }
 
 button:hover {
-  background-color: #303f9f;
+  background-color:  var(--color-primary-1);
   color: white;
 }
 

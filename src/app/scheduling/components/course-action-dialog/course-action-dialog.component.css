@@ -25,12 +25,12 @@ mat-form-field .mat-form-field-infix {
 }
 
 .save-button {
-  background-color: #4CAF50;
+  background-color: var(--color-success);
   color: white;
 }
 
 .delete-button {
-  background-color: #F44336;
+  background-color: var(--color-error);
   color: white;
 }
 
@@ -40,7 +40,7 @@ mat-form-field .mat-form-field-infix {
 }
 
 .warning-text {
-  color: #F44336;
+  color:  var(--color-error);
   font-weight: 500;
 }
 
@@ -51,7 +51,7 @@ textarea {
 
 /* Focus styles for better accessibility */
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: #3f51b5;
+  color: var(--color-secondary);;
 }
 
 /* Error styling */
