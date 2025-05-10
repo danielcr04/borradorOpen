@@ -20,6 +20,8 @@ import {CourseManagementComponent} from "../../components/course-management/cour
 import {MatIcon} from "@angular/material/icon";
 import {NgClass} from "@angular/common";
 import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
+import {CourseActionDialogComponent} from '../../components/course-action-dialog/course-action-dialog.component';
 
 @Component({
   selector: 'app-view-courses',
@@ -55,7 +57,7 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
   protected courseData!: Course;
 
   /** Defines which columns should be displayed in the table and their order */
-  protected columnsToDisplay: string[] = ['id', 'name', 'code', 'description', 'actions'];
+  protected columnsToDisplay: string[] = ['name', 'code', 'description', 'actions'];
 
   /** Reference to the Material paginator for handling page-based data display */
   @ViewChild(MatPaginator, {static: false})
@@ -73,6 +75,14 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
 
   /** Service for handling course-related API operations */
   private courseService: CourseService = inject(CourseService);
+
+
+  //NUEVOOOO
+  /** Dialog service for opening dialogs */
+  private dialog = inject(MatDialog);
+
+  /** Current course for operations */
+  protected course: Course = new Course({});
 
   //#endregion
 
@@ -105,21 +115,62 @@ export class ViewCoursesComponent implements OnInit, AfterViewInit {
     this.getAllCourses();
   }
 
+  protected onNewCourse(): void {
+    const dialogRef = this.dialog.open(CourseActionDialogComponent, {
+      data: {
+        mode: 'add',
+        course: new Course({})
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.courseService.create(result).subscribe((response: Course) => {
+          this.getAllCourses(); // Refresh the list
+        });
+      }
+    });
+  }
+
+
   /**
    * Handles the edit action for a course
    * @param item - The course to be edited
    */
-  protected onEditItem(item: Course) {
-    this.editMode = true;
-    this.courseData = item;
+  protected onEditItem(item: Course): void {
+    const dialogRef = this.dialog.open(CourseActionDialogComponent, {
+      data: {
+        mode: 'edit',
+        course: {...item} // Create a copy to avoid modifying the original until submission
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.courseService.update(result.id, result).subscribe(() => {
+          this.getAllCourses(); // Refresh the list
+        });
+      }
+    });
   }
 
   /**
    * Handles the delete action for a course
    * @param item - The course to be deleted
    */
-  protected onDeleteItem(item: Course) {
-    this.deleteCourse(item.id);
+  protected onDeleteItem(item: Course): void {
+    const dialogRef = this.dialog.open(CourseActionDialogComponent, {
+      data: {
+        mode: 'delete',
+        course: item
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteCourse(item.id);
+      }
+    });
   }
 
   /**
