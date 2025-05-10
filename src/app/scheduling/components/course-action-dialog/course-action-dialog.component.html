@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+
+<div mat-dialog-content>
+  <!-- Form for add/edit -->
+  @if (mode === 'add' || mode === 'edit') {
+    <form #courseForm="ngForm" class="form-row">
+      <!-- Campo para el nombre del curso -->
+      <mat-form-field>
+        <input [(ngModel)]="course.name" matInput name="name" placeholder="Course Name" required>
+      </mat-form-field>
+
+      <!-- Campo para el código del curso -->
+      <mat-form-field>
+        <input [(ngModel)]="course.code" matInput name="code" placeholder="Course code" required>
+      </mat-form-field>
+
+      <!-- Campo para la descripción del curso -->
+      <mat-form-field>
+        <input [(ngModel)]="course.description" matInput name="description" placeholder="Course Description" required>
+      </mat-form-field>
+    </form>
+  }
+
+  <!-- Confirmation for delete -->
+  @if (mode === 'delete') {
+    <p>Are you sure you want to delete the course "{{ course.name }}"?</p>
+    <p>This action cannot be undone.</p>
+  }
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+
+  @if (mode === 'add' || mode === 'edit') {
+    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+  }
+
+  @if (mode === 'delete') {
+    <button mat-raised-button color="warn" (click)="onConfirmDelete()">Delete</button>
+  }
+</div>
