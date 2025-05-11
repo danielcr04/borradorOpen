@@ -21,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgForOf, NgIf } from '@angular/common';
 import { CourseService } from '../../services/course.service';
 import { MatIconModule } from '@angular/material/icon';
+//import { ClassroomService } from '../../services/classroom.service';
 
 @Component({
   selector: 'app-weekly-schedule-dialog',
@@ -53,6 +54,7 @@ export class WeeklyScheduleActionDialogComponent {
   // Data for select options
   availableCourses: Course[] = [];
   availableClassrooms: Classroom[] = [];
+  //availableTeachers: Teachers[]= []; IMPORTANTE
   dayOptions: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   // Current schedule being edited
@@ -61,6 +63,8 @@ export class WeeklyScheduleActionDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<WeeklyScheduleActionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    //private teacherService: TeacherService,
+    //private classroomService: ClassroomService,
     private courseService: CourseService
   ) {
     this.mode = data.mode;
@@ -77,6 +81,7 @@ export class WeeklyScheduleActionDialogComponent {
     // Load available courses and classrooms
     this.loadAvailableCourses();
     this.loadAvailableClassrooms();
+    //this.loadAvailableTeachers();
   }
 
   loadAvailableCourses() {
@@ -85,12 +90,22 @@ export class WeeklyScheduleActionDialogComponent {
     });
   }
 
+
+  /*
+  loadAvailableTeachers() {
+    this.teacherService.getAll().subscribe(teachers => {
+      this.availableTeachers = teachers;
+    });
+  }
+  */
+
+
   loadAvailableClassrooms() {
     // Ideally, this would call a classroom service
     // For now, we'll use mock data
 
-   /* this.courseService.getAll().subscribe(courses => {
-      this.availableCourses = courses;
+   /* this.classroomService.getAll().subscribe(classrooms => {
+      this.availableClassrooms = classrooms;
     });*/
 
     this.availableClassrooms = [
@@ -117,13 +132,17 @@ export class WeeklyScheduleActionDialogComponent {
       this.currentSchedule.timeRange.start &&
       this.currentSchedule.timeRange.end &&
       this.currentSchedule.course.id &&
+      //this.currentSchedule.teacher.id &&
       this.currentSchedule.classroom.id) {
 
       // Find the full Course and Classroom objects
       const course = this.availableCourses.find(c => c.id === this.currentSchedule.course.id);
+      //const teacher = this.availableTeachers.find(t => t.id === this.currentSchedule.teacher.id);
       const classroom = this.availableClassrooms.find(c => c.id === this.currentSchedule.classroom.id);
 
-      if (course && classroom) {
+
+      // course && classroom && teacher
+      if (course && classroom ) {
         // Create a new Schedule object with full references
         const scheduleToAdd = new Schedule({
           id: Date.now(), // Temporary ID
@@ -131,6 +150,7 @@ export class WeeklyScheduleActionDialogComponent {
           timeRange: { ...this.currentSchedule.timeRange },
           course: course,
           classroom: classroom
+          //teacher: teacher
         });
 
         // Add to weekly schedule

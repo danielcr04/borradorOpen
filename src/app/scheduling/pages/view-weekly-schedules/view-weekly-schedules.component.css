@@ -1,3 +1,5 @@
+/* Actualización para view-weekly-schedules.component.css */
+
 .table-wrapper {
   width: 100%;
   margin: 50px auto;
@@ -27,15 +29,12 @@ mat-header-cell {
 
 button {
   margin-right: 8px;
-}
-
-button[color="primary"] {
-  background-color: var(--color-primary);
+  background-color:  var(--color-primary);
   color: white;
 }
 
-button[color="primary"]:hover {
-  background-color: var(--color-primary-1);
+button:hover {
+  background-color:  var(--color-primary-1);
   color: white;
 }
 
@@ -53,9 +52,15 @@ mat-paginator {
   padding-right: 20px;
 }
 
+/* Modificamos esta parte para asegurar que los botones tengan espacio */
 .mat-column-actions {
-  width: 150px;
-  text-align: center;
+  white-space: nowrap; /* Evitamos que los botones se envuelvan */
+}
+
+.action-button-group {
+  display: flex;
+  align-items: end;
+  gap: 5px; /* Espacio entre botones */
 }
 
 .mat-cell:not(:last-of-type), .mat-header-cell:not(:last-of-type) {

@@ -13,5 +13,58 @@
       "description": "bbbbbbb"
     }
   ],
-  "scheduleWeekly": []
+  "weeklySchedules": [
+    {
+      "id": 1,
+      "name": "veranitooooo",
+      "weekSchedule": [
+        {
+          "id": 1746914213804,
+          "dayOfWeek": "Monday",
+          "timeRange": {
+            "start": "07:00",
+            "end": "09:00"
+          },
+          "course": {
+            "id": "1",
+            "name": "Matematica",
+            "code": "MAT",
+            "description": "aaaaaaa"
+          },
+          "classroom": {
+            "id": 2,
+            "code": "B202",
+            "capacity": 25,
+            "campus": "SJL"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "dasdas",
+      "weekSchedule": [
+        {
+          "id": 1746914605348,
+          "dayOfWeek": "Tuesday",
+          "timeRange": {
+            "start": "07:00",
+            "end": "08:00"
+          },
+          "course": {
+            "id": "2",
+            "name": "Fisica",
+            "code": "FIS",
+            "description": "bbbbbbb"
+          },
+          "classroom": {
+            "id": 2,
+            "code": "B202",
+            "capacity": 25,
+            "campus": "SJL"
+          }
+        }
+      ]
+    }
+  ]
 }

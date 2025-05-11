@@ -12,6 +12,7 @@ export class Schedule {
   timeRange: TimeRange;
   course: Course;
   classroom: Classroom;
+  //teacher: Teacher;
 
   constructor(schedule: {
     id?: number,
@@ -19,6 +20,7 @@ export class Schedule {
     timeRange?: TimeRange,
     course?: Course,
     classroom?: Classroom
+    //teacher?: Teacher
   }) {
     this.id = schedule.id || 0;
     this.dayOfWeek = schedule.dayOfWeek || '';

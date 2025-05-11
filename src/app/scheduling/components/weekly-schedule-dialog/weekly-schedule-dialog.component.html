@@ -49,7 +49,21 @@
           </mat-select>
         </mat-form-field>
 
-        <!-- Classroom Selection -->
+
+        <!--
+      <mat-form-field appearance="outline">
+        <mat-label>Teacher</mat-label>
+        <mat-select [(ngModel)]="currentSchedule.teacher.id" name="teacher" required>
+          @for (teacher of availableTeachers; track teacher.id) {
+            <mat-option [value]="teacher.id">{{ teacher.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      -->
+
+
+
+      <!-- Classroom Selection -->
         <mat-form-field appearance="outline">
           <mat-label>Classroom</mat-label>
           <mat-select [(ngModel)]="currentSchedule.classroom.id" name="classroom" required>
@@ -72,7 +86,13 @@
               <br>
               Course: {{ schedule.course.name }} ({{ schedule.course.code }})
               <br>
-              Classroom: {{ schedule.classroom.code }}
+              Classroom: {{ schedule.classroom.code }} ({{ schedule.classroom.campus }})
+
+              <!--
+              <br>
+              Teacher: {{ schedule.teacher.name }}
+              -->
+
             </div>
             <button mat-icon-button color="warn" (click)="removeSchedule(i)">
               <mat-icon>delete</mat-icon>
@@ -94,10 +114,10 @@
   <button mat-button (click)="onCancel()">Cancel</button>
 
   @if (mode === 'add' || mode === 'edit') {
-    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+    <button mat-raised-button  class="save-button"  (click)="onSubmit()">Save</button>
   }
 
   @if (mode === 'delete') {
-    <button mat-raised-button color="warn" (click)="onConfirmDelete()">Delete</button>
+    <button mat-raised-button class="delete-button"  (click)="onConfirmDelete()">Delete</button>
   }
 </div>
